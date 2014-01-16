@@ -1,0 +1,6 @@
+#protection time is in seconds
+protectionEnabled: true
+protectionTime: 15
+blockedCommands:
+- /tp
+- /home

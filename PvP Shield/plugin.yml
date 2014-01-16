@@ -1,0 +1,7 @@
+name: PvPShield
+main: com.daawsomest.shield.PvPShield
+version: 1.0
+commands:
+  shield:
+    description: PvP Shield
+    usage: /shield
