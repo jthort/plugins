@@ -38,7 +38,11 @@ public class RandomWarp extends JavaPlugin implements Listener {
 		radius = getConfig().getInt("radius");
 		
 		setupPermissions();
+		try{
 		setupEconomy();
+		}catch(Exception e){
+			System.out.println("Could not find the Vault file!");
+		}
 	}
 
 	public void onDisable() {
@@ -63,7 +67,7 @@ public class RandomWarp extends JavaPlugin implements Listener {
 		return econ != null;
 	}
 	
-	public int generateX() {
+	public int generateNum() {
 		int x;
 		
 		int i = new Random().nextInt(2);
@@ -75,17 +79,6 @@ public class RandomWarp extends JavaPlugin implements Listener {
 		return x;
 	}
 	
-	public int generateZ() {
-		int z;
-		
-		int i = new Random().nextInt(2);
-		if(i == 0)
-			z = (-1)*(new Random().nextInt(radius));
-		else
-			z = (1)*(new Random().nextInt(radius));
-		
-		return z;
-	}
 	
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
@@ -105,8 +98,8 @@ public class RandomWarp extends JavaPlugin implements Listener {
 				
 				EconomyResponse r = econ.withdrawPlayer(player.getName(), price);
 				if (r.transactionSuccess()) {
-					int x = generateX();
-					int z = generateZ();
+					int x = generateNum();
+					int z = generateNum();
 					int y = 50;
 					
 					World world = player.getWorld();
@@ -116,8 +109,8 @@ public class RandomWarp extends JavaPlugin implements Listener {
 							!(new Location(world, x, y - 1, z).getBlock().getType().isSolid())
 							) {
 						if(y > 200) {
-							x = generateX();
-							z = generateZ();
+							x = generateNum();
+							z = generateNum();
 						}
 						
 						y++;
